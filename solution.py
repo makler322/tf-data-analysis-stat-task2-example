@@ -1,17 +1,17 @@
 import pandas as pd
 import numpy as np
 
-from scipy.stats import norm
+from scipy.stats import expon
 
 
-chat_id = 123456 # Ваш chat ID, не меняйте название переменной
+chat_id = 419670097  # Ваш chat ID, не меняйте название переменной
+
 
 def solution(p: float, x: np.array) -> tuple:
-    # Измените код этой функции
-    # Это будет вашим решением
-    # Не меняйте название функции и её аргументы
+    n = len(x)
+    min_x = min(x)
     alpha = 1 - p
-    loc = x.mean()
-    scale = np.sqrt(np.var(x)) / np.sqrt(len(x))
-    return loc - scale * norm.ppf(1 - alpha / 2), \
-           loc - scale * norm.ppf(alpha / 2)
+    beta = alpha
+    left = min((1/2 - expon.ppf(alpha) / (n * min_x)) / 35**2, (1/2 - expon.ppf(1 - beta) / (n * min_x)) / 35**2)
+    right = max((1/2 - expon.ppf(alpha) / (n * min_x)) / 35**2, (1/2 - expon.ppf(1 - beta) / (n * min_x)) / 35**2)
+    return left, right

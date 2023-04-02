@@ -12,6 +12,6 @@ def solution(p: float, x: np.array) -> tuple:
     min_x = min(x)
     alpha = 1 - p
     beta = alpha
-    left = min((1/2 - expon.ppf(alpha) / (n * min_x)) / 35**2, (1/2 - expon.ppf(1 - beta) / (n * min_x)) / 35**2)
-    right = max((1/2 - expon.ppf(alpha) / (n * min_x)) / 35**2, (1/2 - expon.ppf(1 - beta) / (n * min_x)) / 35**2)
+    left = min(1/2 - expon.ppf(alpha) / (n * (min_x / 35**2)), 1/2 - expon.ppf(1 - beta) / (n * (min_x / 35**2)))
+    right = max(1/2 - expon.ppf(alpha) / (n * (min_x / 35**2)), 1/2 - expon.ppf(1 - beta) / (n * (min_x / 35**2)))
     return left, right
